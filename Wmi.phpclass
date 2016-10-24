@@ -187,7 +187,7 @@ class      Wmi
 	       FromVariant - converts a Variant to PHP data.
 	
 	 *-------------------------------------------------------------------------------------------------------------*/
-	protected static function  FromVariant ( $variant ) 
+	public static function  FromVariant ( $variant ) 
 	   {
 		if  ( ! is_a ( $variant, "variant" ) )
 			return ( $variant ) ;
@@ -363,14 +363,14 @@ END;
 			foreach  ( $method [ 'parameters' ]  as  $parameter )
 			   {
 				if  ( $parameter [ 'out' ] )
-					$classtext	.=  "\t\t\${$parameter [ 'name' ]}	=  self::FromVariant ( \$vt_{$parameter [ 'name' ]} ) ;\n" ;
+					$classtext	.=  "\t\t\${$parameter [ 'name' ]}	= Wmi::FromVariant ( \$vt_{$parameter [ 'name' ]} ) ;\n" ;
 			    }
 
 			$classtext	.=  "\n" ;
 
 			// If method returns a value then convert it
 			if  ( $method [ 'has-result' ] )
-				$classtext	.=  "\t\treturn ( self::FromVariant ( \$__result__ ) ) ;\n" ;
+				$classtext	.=  "\t\treturn ( Wmi::FromVariant ( \$__result__ ) ) ;\n" ;
 
 			$classtext	.=  "\t    }\n" ;
 		    }
